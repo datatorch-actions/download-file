@@ -1,0 +1,28 @@
+$schema: http://datatorch.io/schema/action.v1.json
+
+name: Download File
+description: Download a file from DataTorch give the file ID.
+inputs:
+  fileId:
+    type: string
+    required: true
+    description: Id of file to download
+  directory:
+    type: string
+    default: ${{ directory.temp }}/download-file
+    description: Path of where to save the downloaded file
+  name:
+    type: string
+    default: ''
+    description: >
+      Name of the file to save as, otherwise it will use the same of the file
+      return by the API.
+  overwrite:
+    type: boolean
+    default: false
+    description: >
+      Download file even if identity file already exists.
+
+runs:
+  using: python
+  main: download_file.py
