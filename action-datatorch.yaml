@@ -2,6 +2,11 @@ $schema: http://datatorch.io/schema/action.v1.json
 
 name: Download File
 description: Download a file from DataTorch give the file ID.
+
+# This action implements a custom cache solution as someone may the delete the
+# file.
+cache: false
+
 inputs:
   fileId:
     type: string

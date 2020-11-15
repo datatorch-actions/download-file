@@ -40,21 +40,25 @@ def has_id_file():
 
 
 def download_file():
+    print("Downloading file...")
     file_path, _ = ApiClient().download_file(file_id, directory=directory, name=name)
+    if not overwrite:
+        create_id_file(file_path)
+    print("File downloaded.")
     return file_path
 
 
 if __name__ == "__main__":
 
+    mkdir_exists(directory)
     if overwrite or not has_id_file():
-        mkdir_exists(directory)
-        print("Downloading file...")
         file_path = download_file()
-        if not overwrite:
-            create_id_file(file_path)
-        print("File downloaded.")
     else:
         print("Return file path from cache.")
         file_path = read_id_file()
+        if os.path.isfile(file_path):
+            print("Return file path from cache.")
+        else:
+            file_path = download_file()
 
     datatorch.set_output("path", file_path)
