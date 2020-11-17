@@ -54,7 +54,6 @@ if __name__ == "__main__":
     if overwrite or not has_id_file():
         file_path = download_file()
     else:
-        print("Return file path from cache.")
         file_path = read_id_file()
         if os.path.isfile(file_path):
             print("Return file path from cache.")
